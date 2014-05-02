@@ -1,28 +1,32 @@
 # desklickrb
 
-Flickr から画像ファイルをダウンロードして Mac のデスクトップピクチャ(壁紙)に設定する Ruby スクリプトです。  
+Japanese document is here <http://blog.bylo.jp/develop/2014/05/744/>.
 
-## 前提
+This ruby gem refreshes Mac's Desktop Picture using Flickr's picture.  
+The name desklickrb is named by hommage to Desklickr that is similar app.
+An executable file deslickrb in bin directory.
 
-以下がインストールされていることが条件です。
+## Environment
 
-- ruby 2.0.0 以上
-- rubygems
+This script was tested on:
 
-## インストール
+- MacOS Marverics
+- Ruby 2.0.0
+
+## Installation
 
 ```
 gem install desklickrb
 ```
 
-## もひとつ準備
+## Preparing the Flickr API key
 
-Flickr の API キーを作ってください。 <https://www.flickr.com/services/apps/create/>  
-ここで作った API キーをコマンドライン引数の `-k` で指定するようにしてください。
+Flickr API Key must be created at <https://www.flickr.com/services/apps/create/>.  
+Then the API Key should be specified with -k option to executable desklickrb.
 
-## 使い方
+## Usage
 
-desklickrb -h で下記のヘルプが表示されます。(ロングオプションには未対応)
+You can see the help with `desklickrb -h` as the followings.
 
 ```
 desklickrb [-v] [-k flickr-api-key] [-o filename] [gallery options]
@@ -38,10 +42,4 @@ desklickrb [-v] [-k flickr-api-key] [-o filename] [gallery options]
      default is choosing from interestingness.
 ```
 
-まず、動きをチェックしたい場合は、APIキーを下記のように指定して、実行してみてください。  
-デスクトップピクチャが変わると思います。
-
-`desklickrb -k "FlickrのAPIキー"`
-
-デフォルトでは Flickr の interestingness から画像をランダムで選択してダウンロードします。
-`-u` で指定ユーザのもの、`-t` で指定したタグのものをダウンロードします。
+Try `deslickrb -k "Flickr API Key"`, then you see a new desktop picture.
