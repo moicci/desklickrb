@@ -2,13 +2,15 @@
 
 require 'desklickrb'
 
+include Desklickrb
+
 USAGE =<<EOU
 #$0 [-v] [-k flickr-api-key] [-o filename] [gallery options]
 
   -v: verbose
   -k: API key created on https://www.flickr.com/services/apps/create/
   -u: download picture of user-id
-  -o: download picture to filename (default: #{@filename})
+  -o: download picture to filename (default: #{filename})
 
   gallery options:
      -u user-id: gallery of user-id
@@ -19,13 +21,12 @@ EOU
 abort USAGE unless params = ARGV.getopts('hk:u:o:t:v')
 abort USAGE if params['h']
 
-api_key = params['k']
-desklickrb = Desklickrb.new(api_key)
-desklickrb.verbose = params['v']
-desklickrb.user_id = params['u']
-desklickrb.tag = params['t']
-desklickrb.filename = params['o'] if params['o']
+@api_key = params['k']
+@verbose = params['v']
+@user_id = params['u']
+@tag = params['t']
+@filename = params['o'] if params['o']
 
-abort "no photos" unless size = desklickrb.choose_photo
-desklickrb.write_file(size)
-desklickrb.apply_desktop_picture
+abort "no photos" unless size = choose_photo
+write_file(size)
+apply_desktop_picture

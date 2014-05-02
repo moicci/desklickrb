@@ -1,3 +1,3 @@
-class Desklickrb
-  VERSION = "1.0.0"
+module Desklickrb
+  VERSION = "1.0.1"
 end
