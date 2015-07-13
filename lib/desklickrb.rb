@@ -63,13 +63,24 @@ module Desklickrb
     another_file = filename + ".jpg"
     FileUtils.cp(filename, another_file)
 
-    IO.popen("/usr/bin/osascript", "r+") do |io|
-      io.puts <<EOS
+script =<<EOS
 tell application "System Events"
   set picture of every desktop to "#{another_file}"
   set picture of every desktop to "#{filename}"
 end tell
 EOS
-    end
+
+# 2015/07/13: osascript がこんなエラーを出すので 2>&1 した。
+# osascript: OpenScripting.framework - scripting addition "/Library/ScriptingAdditions/LCC
+# Scroll Enhancer Loader.osax" cannot be used with the current OS because it has no OSAXHandlers
+# entry in its Info.plist.
+    IO.popen("/usr/bin/osascript > /dev/null 2>&1", "r+") {|io| io.puts script }
   end
 end
+
+include Desklickrb
+@api_key = "77a6d216ed95e769e58235e942f39bc9"
+@filename = "/Users/fukuda/Pictures/desklickrb.jpg"
+abort "no photos" unless size = choose_photo
+write_file(size)
+apply_desktop_picture
